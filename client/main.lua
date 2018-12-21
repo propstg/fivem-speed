@@ -27,7 +27,7 @@ end)
 
 Citizen.CreateThread(function ()
     while true do
-        Citizen.Wait(1000)
+        Citizen.Wait(250)
 
         if isActive then
             local speed = getSpeedInUnits()
@@ -38,15 +38,20 @@ Citizen.CreateThread(function ()
                 if not isArmed then
                     isArmed = true
                     showNotification('armed')
-                    -- TODO play 'armed sound'
+                    PlaySoundFrontend(-1, 'CONFIRM_BEEP', 'HUD_MINI_GAME_SOUNDSET', 1)
                 end
             end
 
             if isArmed and speed < limit then
-                secondsBelow = secondsBelow + 1
+                secondsBelow = secondsBelow + 0.25
             end
 
-            if secondsBelow > allowedSeconds then
+            if secondsBelow == allowedSeconds then
+                PlaySoundFrontend(-1, 'BEEP_GREEN', 'DLC_HEIST_HACKING_SNAKE_SOUNDS', 0)
+            end
+                
+
+            if secondsBelow >= allowedSeconds + 1.75 then
                 isActive = false
                 isArmed = false
                 secondsBelow = 0
