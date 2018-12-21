@@ -10,18 +10,17 @@ RegisterCommand('speed', function(source, args)
         isActive = false
         showNotification('deactivated')
     else
-        local vehicle = GetVehiclePedIsUsing(PlayerPedId())
+        vehicle = GetVehiclePedIsUsing(PlayerPedId())
 
         if vehicle == 0 then
             showNotification('not_in_vehicle')
         else
             isActive = true
             isArmed = false
-            vehicle = vehicle
             limit = tonumber(ternary(#args >= 1, args[1], Config.DefaultLimit))
             allowedSeconds = tonumber(ternary(#args >= 2, args[2], Config.DefaultAllowedSecondsBelowSpeed))
 
-            showNotification('installed', Speed.limit, Config.SpeedUnit.display, Speed.allowedSeconds)
+            showNotification('installed', limit, Config.SpeedUnit.display, allowedSeconds)
         end
     end
 end)
@@ -103,12 +102,12 @@ function showNotification(messageName, ...)
     commonNotification(messageName, false, ...)
 end
 
-function blinkNotification(messageName, ...)
-    commonNotification(messageName, true, ...)
+function blinkNotification(messageName)
+    commonNotification(messageName, true)
 end
 
 function commonNotification(messageName, shouldBlink, ...)
     SetNotificationTextEntry('STRING')
     AddTextComponentString(translate(messageName, ...))
-    DrawNotification(false, false)
+    DrawNotification(shouldBlink, false)
 end

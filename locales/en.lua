@@ -4,5 +4,5 @@ Locales['en'] = {
     ['not_in_vehicle']   = 'You must be in a vehicle.',
     ['armed']            = '~y~Armed.',
     ['destroyed']        = '~r~Destroyed.',
-    ['about_to_destroy'] = '~y~INCREASE YOUR SPEED.',
+    ['increase_speed'] = '~y~INCREASE YOUR SPEED.',
 }
