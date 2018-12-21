@@ -5,6 +5,12 @@ local limit = 0
 local allowedSeconds = 0
 local secondsBelow = 0
 
+local description = 'Add a bomb to the car you are in that will blow up after reaching the threshold speed and then falling before it. Default '..Config.DefaultLimit
+    ..Config.SpeedUnit.display..' with a delay of '..Config.DefaultAllowedSecondsBelowSpeed..'seconds. Use /speed to cancel if the car has not exploded already.'
+local speedHelp = 'Optional speed at which the bomb arms and detonates below. In '..Config.SpeedUnit.display
+local delayHelp = 'Optional number of seconds that the bomb will allow the speed to be less than the threshold. If the speed is still below the threshold after this many seconds, it will detonate.'
+TriggerEvent('chat:addSuggestion', '/speed', description, {{name = 'speed', help = speedHelp}, {name = 'delay', help = delayHelp}})    
+
 RegisterCommand('speed', function(source, args)
     if isActive then
         isActive = false
